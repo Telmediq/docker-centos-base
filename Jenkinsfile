@@ -20,7 +20,7 @@ pipeline {
 
     environment {
         AWS = credentials('jenkins-docker-build')
-        REGISTRY_URI = credential('master-ecr-repo-url')
+        REGISTRY_URI = credentials('master-ecr-repo-url')
     }
 
     stages {
