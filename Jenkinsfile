@@ -20,6 +20,7 @@ pipeline {
 
     environment {
         AWS = credentials('jenkins-docker-build')
+        REGISTRY_URI = credential('master-ecr-repo-url`)
     }
 
     stages {
@@ -27,6 +28,7 @@ pipeline {
         stage ('Setup') {
             steps {
                 sh '''
+                    export REGISTRY_URI=$REGISTRY_URI
                     export AWS_ACCESS_KEY_ID=$AWS_USR
                     export AWS_SECRET_ACCESS_KEY=$AWS_PSW
                     make repo-login
@@ -51,6 +53,7 @@ pipeline {
             }
             steps {
                 sh '''
+                    export REGISTRY_URI=$REGISTRY_URI
                     export AWS_ACCESS_KEY_ID=$AWS_USR
                     export AWS_SECRET_ACCESS_KEY=$AWS_PSW
                     make publish
